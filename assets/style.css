@@ -128,3 +128,5 @@ img{max-width:100%;display:block}
   .order__wrap{grid-template-columns:1fr}
   .drawer__panel{width:92%}
 }
+
+.product__thumb{cursor:pointer}

@@ -1,3 +1,6 @@
+
+document.addEventListener('DOMContentLoaded', function(){ 
+try{ 
 // Tiny util
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
@@ -41,6 +44,15 @@ function renderCartBadges(){
   // drawer items
   const d = $('#drawerItems');
   d.innerHTML = cont.innerHTML;
+}
+
+// Toast helper
+function toast(msg){
+  const t = document.getElementById('toast'); if (!t) return;
+  t.textContent = msg || 'Đã thêm vào giỏ hàng';
+  t.style.display = 'block'; t.style.opacity = 1;
+  setTimeout(()=>{ t.style.transition='opacity .4s'; t.style.opacity = 0; }, 1200);
+  setTimeout(()=>{ t.style.display='none'; t.style.transition='none'; }, 1700);
 }
 
 // Add to cart buttons
@@ -136,3 +148,49 @@ $('#orderForm').addEventListener('submit', async (e)=>{
 
 // Init
 renderCartBadges();
+
+
+// Robust delegated click for [data-add] (handles quotes/&quot; cases)
+document.body.addEventListener('click', function(e){
+  const btn = e.target.closest('[data-add]');
+  if (!btn) return;
+  try{
+    const raw = btn.getAttribute('data-add');
+    const fixed = raw.replace(/&quot;/g, '"').replace(/\'(?=\w|\d|\s)/g, '"');
+    let data; try{ data = JSON.parse(raw); }catch(_){
+      data = JSON.parse(fixed);
+    }
+    if (!data || !data.id) return;
+    const found = cart.find(i=>i.id===data.id);
+    if (found) found.qty += 1; else cart.push({...data, qty:1});
+    saveCart(); renderCartBadges();
+    if (typeof toast==='function') toast('Đã thêm vào giỏ');
+    document.getElementById('cartDrawer')?.classList.add('open');
+  }catch(err){
+    console.error('Add-to-cart error:', err);
+  }
+});
+
+// Click on product image behaves like buy button
+document.addEventListener('click', function(e){
+  const thumb = e.target.closest('.product__thumb');
+  if (!thumb) return;
+  const card = thumb.closest('.product');
+  if (!card) return;
+  const btn = card.querySelector('[data-add]');
+  if (btn) btn.click();
+});
+
+// Keyboard support on images
+document.addEventListener('keydown', function(e){
+  if (!['Enter',' '].includes(e.key)) return;
+  const active = document.activeElement;
+  if (!active?.classList?.contains('product__thumb')) return;
+  e.preventDefault();
+  const card = active.closest('.product');
+  const btn = card?.querySelector('[data-add]');
+  if (btn) btn.click();
+});
+
+}catch(err){ console.error('Init error:', err); }
+});
