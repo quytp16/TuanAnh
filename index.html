@@ -15,9 +15,10 @@
   <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
-      <div class="topbar__left">Hotline: <a href="tel:+84905695949">0905.69.59.49</a> (8:00–12:00, 13:30–17:00)</div>
+      <div class="topbar__left">Hotline: <a href="tel:0986943789">0986 943 789</a> (8:00–12:00, 13:30–17:00)</div>
       <div class="topbar__right">
-        <a href="https://zalo.me/0905695949" target="_blank" class="topbar__link">Chat Zalo</a>
+        <a href="#order" class="topbar__link">Đặt hàng nhanh</a>
+        <a href="#contact" class="topbar__link">Liên hệ</a>
       </div>
     </div>
   </div>
@@ -29,10 +30,12 @@
       <nav class="nav">
         <a href="#products">Sản phẩm</a>
         <a href="#featured">Nổi bật</a>
-        <a href="#contact">Liên hệ</a>
+        <a href="#benefits">Ưu điểm</a>
       </nav>
       <div class="header__cta">
-        <button id="openCart" class="btn">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
+        <button id="openCart" class="btn btn--ghost">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
+        <a href="#order" class="btn">Mua ngay</a>
+        <button id="menuBtn" class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
     </div>
   </header>
@@ -41,7 +44,8 @@
   <div id="mobileMenu" class="mobile-menu">
     <a href="#products">Sản phẩm</a>
     <a href="#featured">Nổi bật</a>
-    <a href="#contact" class="btn btn--full">Liên hệ</a>
+    <a href="#benefits">Ưu điểm</a>
+    <a href="#order" class="btn btn--full">Mua ngay</a>
   </div>
 
   <!-- Hero -->
@@ -52,7 +56,7 @@
         <p>Âm êm – vị đậm. Tư vấn chọn mẫu phù hợp, giao nhanh toàn quốc.</p>
         <div class="hero__cta">
           <a href="#products" class="btn">Xem sản phẩm</a>
-          <button id="openCart2" class="btn btn--ghost">Mở giỏ hàng</button>
+          <a href="#order" class="btn btn--ghost">Đặt hàng nhanh</a>
         </div>
         <div class="hero__trust">
           <div>✔ Đổi trả 30 ngày</div>
@@ -71,64 +75,9 @@
     <div class="container">
       <div class="section__head">
         <h2>Sản phẩm</h2>
-        <span class="muted">Bấm ảnh hoặc “Mua ngay” để thêm vào giỏ</span>
+        <a href="#order" class="link">Đặt hàng</a>
       </div>
-      <div id="productGrid" class="products">
-        <!-- Static sample products -->
-        <div class="card product">
-          <div class="product__thumb" tabindex="0">
-            <div class="product__badge">Flash sale</div>
-            <img src="img/logo.jpg" alt="Điếu nứa bọc đồng nõ ngọc">
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu nứa bọc đồng nõ ngọc</h3>
-            <div class="product__price"><del>400.000₫</del><strong>360.000₫</strong></div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p1","name":"Điếu nứa bọc đồng nõ ngọc","price":360000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="card product">
-          <div class="product__thumb" tabindex="0">
-            <img src="img/logo.jpg" alt="Hộp đồng đựng thuốc lào">
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Hộp đồng đựng thuốc lào</h3>
-            <div class="product__price"><strong>75.000₫</strong></div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p2","name":"Hộp đồng đựng thuốc lào","price":75000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="card product">
-          <div class="product__thumb" tabindex="0">
-            <img src="img/logo.jpg" alt="Điếu trúc bọc đồng hoa văn chìm">
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu trúc bọc đồng hoa văn chìm</h3>
-            <div class="product__price"><strong>299.000₫</strong></div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p3","name":"Điếu trúc bọc đồng hoa văn chìm","price":299000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="card product">
-          <div class="product__thumb" tabindex="0">
-            <div class="product__badge" style="background:#111827;color:#fff">Hết hàng</div>
-            <img src="img/logo.jpg" alt="Điếu trúc 9 mắt cao cấp">
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu trúc 9 mắt cao cấp</h3>
-            <div class="product__price"><strong>1.500.000₫</strong></div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" disabled>Hết hàng</button>
-          </div>
-        </div>
-      </div>
+      <div id="productGrid" class="products"></div>
     </div>
   </section>
 
@@ -136,34 +85,81 @@
   <section id="featured" class="section alt">
     <div class="container">
       <div class="section__head"><h2>Sản phẩm nổi bật</h2></div>
-      <div id="featuredGrid" class="products">
-        <div class="card product">
-          <div class="product__thumb" tabindex="0">
-            <div class="product__badge">Flash sale</div>
-            <img src="img/logo.jpg" alt="Điếu cày bọc đồng toàn thân">
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu cày bọc đồng toàn thân</h3>
-            <div class="product__price"><del>750.000₫</del><strong>690.000₫</strong></div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p5","name":"Điếu cày bọc đồng toàn thân","price":690000}'>Mua ngay</button>
-          </div>
-        </div>
+      <div id="featuredGrid" class="products"></div>
+    </div>
+  </section>
 
-        <div class="card product">
-          <div class="product__thumb" tabindex="0">
-            <div class="product__badge" style="background:#111827;color:#fff">Hết hàng</div>
-            <img src="img/logo.jpg" alt="Trúc rút full epoxy">
-          </div>
-          <div class="product__body">
-            <h3 class="product__title">Trúc rút full epoxy</h3>
-            <div class="product__price"><strong>600.000₫</strong></div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" disabled>Hết hàng</button>
-          </div>
+  <!-- Benefits -->
+  <section id="benefits" class="benefits">
+    <div class="container benefits__grid">
+      <div class="benefit">
+        <svg viewBox="0 0 24 24" class="ico"><path d="M12 2l4 4H8l4-4zm0 20l-4-4h8l-4 4zM2 12l4-4v8l-4-4zm20 0l-4 4V8l4 4z"/></svg>
+        <h4>Hỗ trợ nhanh</h4><p>Hotline & Zalo 24/7.</p>
+      </div>
+      <div class="benefit">
+        <svg viewBox="0 0 24 24" class="ico"><path d="M3 13h2l3-6h11l3 6v6h-2v-2H5v2H3v-6zM6 16h12"/></svg>
+        <h4>Giao hàng toàn quốc</h4><p>3–5 ngày, kiểm hàng trước khi nhận.</p>
+      </div>
+      <div class="benefit">
+        <svg viewBox="0 0 24 24" class="ico"><path d="M12 1a9 9 0 019 9c0 7-9 13-9 13S3 17 3 10a9 9 0 019-9zm0 4a5 5 0 100 10 5 5 0 000-10z"/></svg>
+        <h4>Thanh toán linh hoạt</h4><p>COD, Momo, chuyển khoản.</p>
+      </div>
+      <div class="benefit">
+        <svg viewBox="0 0 24 24" class="ico"><path d="M6 6h12v12H6z"/></svg>
+        <h4>Đổi trả 30 ngày</h4><p>Theo chính sách cửa hàng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order -->
+  <section id="order" class="order">
+    <div class="container">
+      <div class="order__wrap">
+        <div class="order__left">
+          <h2>Đặt hàng nhanh</h2>
+          <p>Điền thông tin, chúng tôi sẽ xác nhận qua email và điện thoại.</p>
+          <form id="orderForm" action="https://formspree.io/f/meozvdoo" method="POST">
+            <input type="text" name="_gotcha" style="display:none">
+            <input type="hidden" name="_subject" value="Đơn hàng mới - Tuấn Anh Điếu Cày">
+            <div class="grid-2">
+              <div><label>Họ và tên</label><input name="name" required></div>
+              <div><label>Email</label><input type="email" name="email" required></div>
+            </div>
+            <div class="grid-2">
+              <div><label>Số điện thoại</label><input name="phone" required></div>
+              <div>
+                <label>Sản phẩm</label>
+                <select name="product" id="formProduct" required></select>
+              </div>
+            </div>
+            <div class="grid-2">
+              <div><label>Số lượng</label><input type="number" name="qty" id="formQty" value="1" min="1" required></div>
+              <div><label>Địa chỉ</label><input name="address" required></div>
+            </div>
+            <label>Ghi chú</label>
+            <textarea name="note" rows="3" placeholder="Yêu cầu giao hàng, thời gian nhận..."></textarea>
+
+            <div class="order__total">
+              <span>Tạm tính:</span><strong id="orderTotal">0₫</strong>
+            </div>
+
+            <div class="order__actions">
+              <button class="btn" id="submitBtn" type="submit">Gửi đơn hàng</button>
+              <div id="ok" class="alert success">Đặt hàng thành công! Vui lòng kiểm tra email.</div>
+              <div id="err" class="alert error">Gửi thất bại. Vui lòng thử lại.</div>
+            </div>
+          </form>
         </div>
+        <aside class="order__right">
+          <h3>Giỏ hàng</h3>
+          <div id="cartEmpty" class="muted">Chưa có sản phẩm nào.</div>
+          <div id="cartItems" class="cart-items"></div>
+          <div class="cart__total">
+            <span>Tổng:</span><strong id="cartTotal">0₫</strong>
+          </div>
+          <button class="btn btn--ghost" id="clearCart">Xóa giỏ hàng</button>
+          <button class="btn btn--ghost" id="resetStock">Reset tồn kho (demo)</button>
+        </aside>
       </div>
     </div>
   </section>
@@ -173,76 +169,30 @@
     <div class="container footer__bottom">
       <span>© <script>document.write(new Date().getFullYear())</script> Tuấn Anh Điếu Cày</span>
       <div class="footer__links">
-        <a class="link" href="tel:+84905695949">Gọi: 0905.69.59.49</a>
-        <a class="link" href="https://zalo.me/0905695949" target="_blank" rel="noopener">Zalo</a>
+        <a class="link" href="tel:0986943789">Gọi: 0986 943 789</a>
+        <a class="link" href="https://zalo.me/0986943789" target="_blank" rel="noopener">Zalo</a>
       </div>
     </div>
   </footer>
 
-  <!-- Cart Drawer (includes checkout) -->
+  <!-- Cart Drawer -->
   <div id="cartDrawer" class="drawer">
     <div class="drawer__overlay" id="closeCart"></div>
     <div class="drawer__panel">
       <div class="drawer__head">
-        <h3>Giỏ hàng & Thanh toán</h3>
+        <h3>Giỏ hàng</h3>
         <button id="xCart" class="icon-btn" aria-label="Đóng">×</button>
       </div>
-
       <div id="drawerItems" class="drawer__items"></div>
-
       <div class="drawer__foot">
         <div class="drawer__total">Tổng: <strong id="drawerTotal">0₫</strong></div>
-        <form id="checkoutForm" class="checkout-form" action="https://formspree.io/f/meozvdoo" method="POST">
-          <input type="text" name="_gotcha" style="display:none">
-          <input type="hidden" name="_subject" value="Đơn hàng mới - Tuấn Anh Điếu Cày (Checkout giỏ)">
-          <input type="hidden" name="cart_total" id="cartTotalHidden" value="0">
-          <input type="hidden" name="cart_json" id="cartJsonHidden" value="[]">
-
-          <div>
-            <label>Họ và tên</label>
-            <input name="name" required>
-          </div>
-          <div>
-            <label>Số điện thoại</label>
-            <input name="phone" required>
-          </div>
-          <div>
-            <label>Email</label>
-            <input type="email" name="email" required>
-          </div>
-          <div>
-            <label>Phương thức</label>
-            <select id="drawerPayment" name="payment_method" required>
-              <option value="COD" selected>COD</option>
-              <option value="BANK">Chuyển khoản</option>
-              <option value="MOMO">MoMo</option>
-            </select>
-          </div>
-          <div style="grid-column:1/-1">
-            <label>Địa chỉ</label>
-            <input name="address" required>
-          </div>
-          <div class="checkout-guides" id="guideCOD" style="display:block">
-            Thanh toán khi nhận hàng (COD). Vui lòng chuẩn bị tiền mặt.
-          </div>
-          <div class="checkout-guides" id="guideBANK" style="display:none">
-            <strong>Chuyển khoản SCB:</strong> STK <strong>329745.22222</strong> — Chủ TK <strong>Ngô Tuấn Anh</strong>. Nội dung <em>Họ tên + SĐT</em>. Sau khi chuyển khoản, vui lòng gửi đơn để xác nhận.
-          </div>
-          <div class="checkout-guides" id="guideMOMO" style="display:none">
-            MoMo: chuyển tới số <em>cung cấp khi xác nhận</em> với nội dung <em>Họ tên + SĐT</em>. Xong bấm gửi đơn.
-          </div>
-
-          <textarea name="note" rows="3" placeholder="Ghi chú giao hàng / yêu cầu khác..."></textarea>
-          <button type="submit" class="btn" style="grid-column:1/-1">Gửi đơn hàng</button>
-          <div id="ok" class="success">Đặt hàng thành công! Vui lòng kiểm tra email.</div>
-          <div id="err" class="error">Gửi thất bại. Vui lòng thử lại.</div>
-        </form>
+        <a href="#order" class="btn btn--full" id="goCheckout">Đặt hàng</a>
       </div>
     </div>
   </div>
 
   <!-- Floating Zalo Chat Button -->
-  <a href="https://zalo.me/0905695949" class="zalo-fab" target="_blank" rel="noopener" aria-label="Chat Zalo">
+  <a href="https://zalo.me/0986943789" class="zalo-fab" target="_blank" rel="noopener" aria-label="Chat Zalo">
     <img src="img/logo.jpg" alt="Zalo" />
   </a>
 
