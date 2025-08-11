@@ -1,3 +1,4 @@
+
 // assets/shop.js
 import { db } from "./firebase-config.js";
 import {
@@ -30,18 +31,12 @@ function productCard(p) {
   </div>`;
 }
 
-// category: null | 'dieucay' | 'thuoclao' | 'phukien'
-async function render(container, { sale=false, category=null } = {}) {
-  const listEl = container.querySelector(".products") || container.querySelector(".container .products") || container;
+async function render(container, filterSale=false) {
+  const listEl = container.querySelector(".products") || container;
   listEl.innerHTML = `<p>Đang tải sản phẩm…</p>`;
   try {
-    let base = collection(db, "products");
-    let q = query(base, orderBy("createdAt", "desc"));
-    if (sale) {
-      q = query(base, where("is_sale","==", true), orderBy("createdAt", "desc"));
-    } else if (category) {
-      q = query(base, where("category","==", category), orderBy("createdAt", "desc"));
-    }
+    let q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+    if (filterSale) q = query(collection(db, "products"), where("is_sale","==", true), orderBy("createdAt", "desc"));
     const snap = await getDocs(q);
     const items = snap.docs.map(d => ({id: d.id, ...d.data()}));
     if (items.length === 0) {
@@ -56,36 +51,8 @@ async function render(container, { sale=false, category=null } = {}) {
 }
 
 (function bootstrap(){
-  let currentCategory = null;
-  const url = new URL(window.location.href);
-  const cat = (url.searchParams.get("cat") || "").toLowerCase();
-  const validCats = ["dieucay","thuoclao","phukien"];
-  currentCategory = validCats.includes(cat) ? cat : null;
-  if (cat) {
-    try { history.replaceState(null, "", location.pathname + location.hash); } catch {}
-  }
-
-
-  // Tabs click -> update state + re-render (no URL change)
-  const tabsWrap = document.getElementById("category-tabs");
-  if (tabsWrap) {
-    const tabs = tabsWrap.querySelectorAll(".tab");
-    const setActive = (val) => {
-      tabs.forEach(b => b.classList.toggle("is-active", (b.dataset.cat||"")=== (val||""));
-    };
-    // init active based on currentCategory
-    setActive(currentCategory||"");
-    tabs.forEach(btn => {
-      btn.addEventListener("click", () => {
-        currentCategory = btn.dataset.cat || null;
-        setActive(btn.dataset.cat||"");
-        if (mainProducts) render(mainProducts, { category: currentCategory });
-      });
-    });
-  }
-
   const flashSection = document.getElementById("flash-sale");
   const mainProducts = document.getElementById("products") || document.querySelector("section#products");
-  if (flashSection) render(flashSection, { sale:true });
-  if (mainProducts) render(mainProducts, { category: currentCategory });
+  if (flashSection) render(flashSection, true);
+  if (mainProducts) render(mainProducts, false);
 })();
