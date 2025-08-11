@@ -15,7 +15,7 @@
   <!-- Topbar -->
   <div class="topbar">
     <div class="container topbar__inner">
-      <div class="topbar__left">Hotline: <a href="tel:0986943789">0986 943 789</a> (8:00–12:00, 13:30–17:00)</div>
+      <div class="topbar__left">Hotline: <a href="tel:+84905695949">0905.69.59.49</a> (8:00–12:00, 13:30–17:00)</div>
       <div class="topbar__right">
         <a href="#order" class="topbar__link">Đặt hàng nhanh</a>
         <a href="#contact" class="topbar__link">Liên hệ</a>
@@ -33,7 +33,7 @@
         <a href="#benefits">Ưu điểm</a>
       </nav>
       <div class="header__cta">
-        <button id="openCart" class="btn btn--ghost">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
+        <button id="openCart" class="btn">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
         <a href="#order" class="btn">Mua ngay</a>
         <button id="menuBtn" class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
@@ -77,7 +77,66 @@
         <h2>Sản phẩm</h2>
         <a href="#order" class="link">Đặt hàng</a>
       </div>
-      <div id="productGrid" class="products"></div>
+      <div id="productGrid" class="products">
+        <!-- Static sample products -->
+        <div class="card product">
+          <div class="product__thumb" tabindex="0">
+            <div class="product__badge">Flash sale</div>
+            <img src="img/logo.jpg" alt="Điếu nứa bọc đồng nõ ngọc">
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Điếu nứa bọc đồng nõ ngọc</h3>
+            <div class="product__price"><del>400.000₫</del><strong>360.000₫</strong></div>
+            <div class="muted">Tồn kho: <span data-stock="p1">8</span></div>
+          </div>
+          <div class="product__actions">
+            <button class="btn btn--small" data-add='{"id":"p1","name":"Điếu nứa bọc đồng nõ ngọc","price":360000}'>Mua ngay</button>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="product__thumb" tabindex="0">
+            <img src="img/logo.jpg" alt="Hộp đồng đựng thuốc lào">
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Hộp đồng đựng thuốc lào</h3>
+            <div class="product__price"><strong>75.000₫</strong></div>
+            <div class="muted">Tồn kho: <span data-stock="p2">15</span></div>
+          </div>
+          <div class="product__actions">
+            <button class="btn btn--small" data-add='{"id":"p2","name":"Hộp đồng đựng thuốc lào","price":75000}'>Mua ngay</button>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="product__thumb" tabindex="0">
+            <img src="img/logo.jpg" alt="Điếu trúc bọc đồng hoa văn chìm">
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Điếu trúc bọc đồng hoa văn chìm</h3>
+            <div class="product__price"><strong>299.000₫</strong></div>
+            <div class="muted">Tồn kho: <span data-stock="p3">5</span></div>
+          </div>
+          <div class="product__actions">
+            <button class="btn btn--small" data-add='{"id":"p3","name":"Điếu trúc bọc đồng hoa văn chìm","price":299000}'>Mua ngay</button>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="product__thumb" tabindex="0">
+            <div class="product__badge" style="background:#111827;color:#fff">Hết hàng</div>
+            <img src="img/logo.jpg" alt="Điếu trúc 9 mắt cao cấp">
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Điếu trúc 9 mắt cao cấp</h3>
+            <div class="product__price"><strong>1.500.000₫</strong></div>
+            <div class="muted">Tồn kho: <span data-stock="p4">0</span></div>
+          </div>
+          <div class="product__actions">
+            <button class="btn btn--small" disabled>Hết hàng</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -85,7 +144,37 @@
   <section id="featured" class="section alt">
     <div class="container">
       <div class="section__head"><h2>Sản phẩm nổi bật</h2></div>
-      <div id="featuredGrid" class="products"></div>
+      <div id="featuredGrid" class="products">
+        <div class="card product">
+          <div class="product__thumb" tabindex="0">
+            <div class="product__badge">Flash sale</div>
+            <img src="img/logo.jpg" alt="Điếu cày bọc đồng toàn thân">
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Điếu cày bọc đồng toàn thân</h3>
+            <div class="product__price"><del>750.000₫</del><strong>690.000₫</strong></div>
+            <div class="muted">Tồn kho: <span data-stock="p5">3</span></div>
+          </div>
+          <div class="product__actions">
+            <button class="btn btn--small" data-add='{"id":"p5","name":"Điếu cày bọc đồng toàn thân","price":690000}'>Mua ngay</button>
+          </div>
+        </div>
+
+        <div class="card product">
+          <div class="product__thumb" tabindex="0">
+            <div class="product__badge" style="background:#111827;color:#fff">Hết hàng</div>
+            <img src="img/logo.jpg" alt="Trúc rút full epoxy">
+          </div>
+          <div class="product__body">
+            <h3 class="product__title">Trúc rút full epoxy</h3>
+            <div class="product__price"><strong>600.000₫</strong></div>
+            <div class="muted">Tồn kho: <span data-stock="p6">0</span></div>
+          </div>
+          <div class="product__actions">
+            <button class="btn btn--small" disabled>Hết hàng</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -129,7 +218,15 @@
               <div><label>Số điện thoại</label><input name="phone" required></div>
               <div>
                 <label>Sản phẩm</label>
-                <select name="product" id="formProduct" required></select>
+                <select name="product" id="formProduct" required>
+                  <option value="">-- Chọn sản phẩm --</option>
+                  <option value="Điếu nứa bọc đồng nõ ngọc (360000)">Điếu nứa bọc đồng nõ ngọc - 360.000₫</option>
+                  <option value="Hộp đồng đựng thuốc lào (75000)">Hộp đồng đựng thuốc lào - 75.000₫</option>
+                  <option value="Điếu trúc bọc đồng hoa văn chìm (299000)">Điếu trúc bọc đồng hoa văn chìm - 299.000₫</option>
+                  <option value="Điếu trúc 9 mắt cao cấp (1500000)">Điếu trúc 9 mắt cao cấp - 1.500.000₫</option>
+                  <option value="Điếu cày bọc đồng toàn thân (690000)">Điếu cày bọc đồng toàn thân - 690.000₫</option>
+                  <option value="Trúc rút full epoxy (600000)">Trúc rút full epoxy - 600.000₫</option>
+                </select>
               </div>
             </div>
             <div class="grid-2">
