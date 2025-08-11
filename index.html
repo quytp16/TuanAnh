@@ -1,390 +1,437 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Điếu Cày Store — Điếu cày & Thuốc lào</title>
-  <meta name="description" content="Điếu cày & thuốc lào chất lượng, giá hợp lý. Giao nhanh toàn quốc.">
-  <link rel="icon" href="img/favicon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Điếu Cày Store — HTML tĩnh (1 file)</title>
+<meta name="description" content="Điếu cày & thuốc lào chất lượng, đặt hàng nhanh.">
+<style>
+:root{
+  --ink:#0f172a; --muted:#64748b; --bg:#f7f7f7; --card:#fff;
+  --brand:#0ea5e9; --line:#e5e7eb; --danger:#ef4444;
+}
+*{box-sizing:border-box} html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+a{text-decoration:none;color:inherit}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:10px;padding:10px 14px;font-weight:600;cursor:pointer}
+.btn:hover{filter:brightness(.95)}
+.btn--ghost{background:transparent;border:1px solid #334155;color:#0f172a}
+.btn--small{padding:8px 10px;border-radius:8px}
+.badge{background:var(--danger);color:#fff;padding:2px 8px;border-radius:999px;font-size:12px;margin-left:6px}
+
+.topbar{background:#0b1220;color:#e2e8f0;font-size:14px}
+.topbar__inner{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+.topbar a{color:#e2e8f0}
+
+.header{position:sticky;top:0;background:#0f172a;color:#fff;z-index:40}
+.header__inner{display:flex;justify-content:space-between;align-items:center;height:60px}
+.brand{display:flex;align-items:center;font-weight:700}
+.brand__logo{width:28px;height:28px;margin-right:10px;border-radius:6px;overflow:hidden}
+.nav{display:flex;gap:18px}
+.header__cta{display:flex;gap:10px;align-items:center}
+
+.hero{background:linear-gradient(180deg,#06121e,#0f172a);color:#e2e8f0;padding:40px 0}
+.hero__inner{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center}
+.hero__copy h1{margin:0 0 10px;font-size:36px;color:#fff}
+.highlight{color:#67e8f9}
+.hero__media img{width:100%;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+@media(max-width:900px){.hero__inner{grid-template-columns:1fr}}
+
+.section{padding:28px 0}
+.section__head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:1050px){.products{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:800px){.products{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.products{grid-template-columns:1fr}}
+.product{background:var(--card);border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);overflow:hidden;display:flex;flex-direction:column}
+.product__thumb{cursor:pointer}
+.product__thumb img{width:100%;height:170px;object-fit:cover;background:#e5e7eb}
+.product__body{padding:12px 12px 0}
+.product__title{margin:0 0 6px;font-size:16px}
+.product__price{font-weight:700;margin-bottom:8px}
+.product__actions{padding:12px}
+
+.order{padding:28px 0;background:#f8fafc}
+.order__wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}
+.order__left,.order__right{background:var(--card);border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);padding:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:900px){.order__wrap{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+label{display:block;font-weight:600;margin-top:10px}
+input,select,textarea{width:100%;padding:10px;margin-top:6px;border:1px solid var(--line);border-radius:10px}
+textarea{resize:vertical}
+.order__total{display:flex;justify-content:space-between;align-items:center;background:#f1f5f9;border:1px solid var(--line);border-radius:10px;padding:10px;margin:10px 0}
+.alert{display:none;padding:10px;border-radius:10px;font-size:14px}
+.alert.success{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+.alert.error{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+
+.cart-items{display:flex;flex-direction:column;gap:10px}
+.cart-item{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center}
+.cart-item img{width:56px;height:56px;border-radius:8px;object-fit:cover;background:#e5e7eb}
+.cart__total{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+
+.footer{background:#0f172a;color:#e2e8f0;padding:28px 0;margin-top:28px}
+.footer__bottom{display:flex;justify-content:space-between;align-items:center;margin-top:12px;border-top:1px solid #111827;padding-top:12px}
+
+.drawer{position:fixed;inset:0;display:none}
+.drawer.open{display:block}
+.drawer__overlay{position:absolute;inset:0;background:rgba(0,0,0,.5)}
+.drawer__panel{position:absolute;top:0;right:0;height:100%;width:360px;background:#fff;display:flex;flex-direction:column}
+.drawer__head{display:flex;justify-content:space-between;align-items:center;padding:14px;border-bottom:1px solid var(--line)}
+.drawer__items{padding:14px;flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px}
+.drawer__foot{padding:14px;border-top:1px solid var(--line)}
+.icon-btn{background:transparent;border:0;font-size:22px;cursor:pointer}
+@media(max-width:900px){.drawer__panel{width:92%}}
+#toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--brand);color:#fff;padding:10px 14px;border-radius:10px;display:none;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:9999}
+</style>
 </head>
 <body>
-  <!-- Topbar -->
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <div class="topbar__left">Hotline: <a href="tel:0986943789">0986 943 789</a> (8:00–12:00, 13:30–17:00)</div>
-      <div class="topbar__right">
-        <a href="#order" class="topbar__link">Đặt hàng nhanh</a>
-        <a href="#contact" class="topbar__link">Liên hệ</a>
+
+<!-- Topbar -->
+<div class="topbar">
+  <div class="container topbar__inner">
+    <div>Hotline: <a href="tel:+84905695949"> 0905.69.59.49</a> (8:00–12:00, 13:30–17:00)</div>
+    <div><a href="#order">Đặt hàng nhanh</a></div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header__inner">
+    <a class="brand" href="#"><span class="brand__logo"><img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Crect width='28' height='28' rx='6' fill='%230ea5e9'/%3E%3C/svg%3E"></span> Điếu Cày Store</a>
+    <nav class="nav">
+      <a href="#products">Sản phẩm</a>
+      <a href="#order">Đặt hàng</a>
+    </nav>
+    <div class="header__cta">
+      <button id="openCart" class="btn btn--ghost">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
+      <a href="#order" class="btn">Mua ngay</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__copy">
+      <h1>Điếu cày & Thuốc lào <span class="highlight">chuẩn vị truyền thống</span></h1>
+      <p>Chất liệu đa dạng, âm êm – vị đậm. Tư vấn chọn mẫu phù hợp, giao nhanh toàn quốc.</p>
+      <div style="display:flex;gap:10px;margin-top:10px">
+        <a href="#products" class="btn">Xem sản phẩm</a>
+        <a href="#order" class="btn btn--ghost">Đặt hàng nhanh</a>
+      </div>
+    </div>
+    <div class="hero__media">
+      <img alt="Hero" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='500'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230ea5e9'/%3E%3Cstop offset='1' stop-color='%23059'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='100%25' height='100%25' rx='18' fill='url(%23g)'/%3E%3Ctext x='50%25' y='52%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='Arial' font-size='36'%3EĐiếu Cày Store%3C/text%3E%3C/svg%3E">
+    </div>
+  </div>
+</section>
+
+<!-- Products -->
+<section id="products" class="section">
+  <div class="container">
+    <div class="section__head">
+      <h2>Sản phẩm</h2>
+      <a href="#order">Đặt hàng</a>
+    </div>
+
+    <div class="products">
+      <!-- Product 1 -->
+      <div class="product">
+        <div class="product__thumb" tabindex="0">
+          <img alt="Điếu nứa bọc đồng nõ ngọc"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='16' fill='%2364748b'%3EĐiếu nứa bọc đồng%3C/text%3E%3C/svg%3E">
+        </div>
+        <div class="product__body">
+          <h3 class="product__title">Điếu nứa bọc đồng nõ ngọc</h3>
+          <div class="product__price">400.000₫</div>
+        </div>
+        <div class="product__actions">
+          <button class="btn btn--small" data-add='{"id":"p1","name":"Điếu nứa bọc đồng nõ ngọc","price":400000}'>Mua ngay</button>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product">
+        <div class="product__thumb" tabindex="0">
+          <img alt="Hộp đồng đựng thuốc lào"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='16' fill='%2364748b'%3EHộp đồng đựng thuốc%3C/text%3E%3C/svg%3E">
+        </div>
+        <div class="product__body">
+          <h3 class="product__title">Hộp đồng đựng thuốc lào</h3>
+          <div class="product__price">75.000₫</div>
+        </div>
+        <div class="product__actions">
+          <button class="btn btn--small" data-add='{"id":"p2","name":"Hộp đồng đựng thuốc lào","price":75000}'>Mua ngay</button>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product">
+        <div class="product__thumb" tabindex="0">
+          <img alt="Điếu trúc bọc đồng hoa văn chìm"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='16' fill='%2364748b'%3ETrúc bọc đồng%3C/text%3E%3C/svg%3E">
+        </div>
+        <div class="product__body">
+          <h3 class="product__title">Điếu trúc bọc đồng hoa văn chìm</h3>
+          <div class="product__price">299.000₫</div>
+        </div>
+        <div class="product__actions">
+          <button class="btn btn--small" data-add='{"id":"p3","name":"Điếu trúc bọc đồng hoa văn chìm","price":299000}'>Mua ngay</button>
+        </div>
+      </div>
+
+      <!-- Product 4 -->
+      <div class="product">
+        <div class="product__thumb" tabindex="0">
+          <img alt="Điếu trúc 9 mắt cao cấp"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='360'%3E%3Crect width='100%25' height='100%25' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='16' fill='%2364748b'%3ETrúc 9 mắt%3C/text%3E%3C/svg%3E">
+        </div>
+        <div class="product__body">
+          <h3 class="product__title">Điếu trúc 9 mắt cao cấp</h3>
+          <div class="product__price">1.500.000₫</div>
+        </div>
+        <div class="product__actions">
+          <button class="btn btn--small" data-add='{"id":"p4","name":"Điếu trúc 9 mắt cao cấp","price":1500000}'>Mua ngay</button>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Header / Nav -->
-  <header class="header">
-    <div class="container header__inner">
-      <a class="brand" href="#"><img src="img/logo.svg" alt="" class="brand__logo"> <span>Điếu Cày Store</span></a>
-      <nav class="nav">
-        <a href="#products">Sản phẩm</a>
-        <a href="#featured">Nổi bật</a>
-        <a href="#blog">Bài viết</a>
-        <a href="#benefits">Ưu điểm</a>
-      </nav>
-      <div class="header__cta">
-        <button id="openCart" class="btn btn--ghost">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
-        <a href="#order" class="btn">Mua ngay</a>
-        <button id="menuBtn" class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile menu -->
-  <div id="mobileMenu" class="mobile-menu">
-    <a href="#products">Sản phẩm</a>
-    <a href="#featured">Nổi bật</a>
-    <a href="#blog">Bài viết</a>
-    <a href="#benefits">Ưu điểm</a>
-    <a href="#order" class="btn btn--full">Mua ngay</a>
-  </div>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container hero__inner">
-      <div class="hero__copy">
-        <h1>Điếu cày & Thuốc lào <span class="highlight">chuẩn vị truyền thống</span></h1>
-        <p>Chất liệu đa dạng, âm êm – vị đậm. Tư vấn chọn mẫu phù hợp, giao nhanh toàn quốc.</p>
-        <div class="hero__cta">
-          <a href="#products" class="btn">Xem sản phẩm</a>
-          <a href="#order" class="btn btn--ghost">Đặt hàng nhanh</a>
-        </div>
-        <div class="hero__trust">
-          <div>✔ Đổi trả 30 ngày</div>
-          <div>✔ COD / Momo / Banking</div>
-          <div>✔ Hỗ trợ 24/7</div>
-        </div>
-      </div>
-      <div class="hero__media">
-        <img src="img/hero.jpg" alt="Bộ sưu tập điếu cày & thuốc lào">
-      </div>
-    </div>
-  </section>
-
-  <!-- Category callouts -->
-  <section id="categories" class="categories">
-    <div class="container grid-2">
-      <a class="category" href="#products">
-        <img src="img/cat-dieucay.jpg" alt="Điếu cày">
-        <div class="category__content">
-          <h3>Điếu Cày</h3>
-          <p>Nhiều chất liệu: trúc, nứa, gỗ, bọc đồng…</p>
-          <span class="link">Mua ngay →</span>
-        </div>
-      </a>
-      <a class="category" href="#products">
-        <img src="img/cat-thuoclao.jpg" alt="Thuốc lào">
-        <div class="category__content">
-          <h3>Thuốc Lào</h3>
-          <p>Tuyển chọn nguồn uy tín, hương vị rõ nét.</p>
-          <span class="link">Mua ngay →</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <!-- Product grid -->
-  <section id="products" class="section">
-    <div class="container">
-      <div class="section__head">
-        <h2>Sản phẩm mới</h2>
-        <a href="#featured" class="link">Xem nổi bật</a>
-      </div>
-      <div class="products">
-        <!-- Product cards -->
-        <div class="product">
-          <div class="product__thumb"><img src="img/p1.jpg" alt="Điếu nứa bọc đồng nõ ngọc"></div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu nứa bọc đồng nõ ngọc</h3>
-            <div class="product__price">400.000₫</div>
+<!-- Order -->
+<section id="order" class="order">
+  <div class="container">
+    <div class="order__wrap">
+      <div class="order__left">
+        <h2>Đặt hàng nhanh</h2>
+        <p>Điền thông tin, chúng tôi sẽ xác nhận qua email và điện thoại.</p>
+        <form id="orderForm" action="https://formspree.io/f/meozvdoo" method="POST">
+          <input type="text" name="_gotcha" style="display:none">
+          <input type="hidden" name="_subject" value="Đơn hàng mới - Điếu Cày Store">
+          <div class="grid-2">
+            <div><label>Họ và tên</label><input name="name" required></div>
+            <div><label>Email</label><input type="email" name="email" required></div>
           </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p1","name":"Điếu nứa bọc đồng nõ ngọc","price":400000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product__thumb"><img src="img/p2.jpg" alt="Hộp đồng đựng thuốc lào"></div>
-          <div class="product__body">
-            <h3 class="product__title">Hộp đồng đựng thuốc lào</h3>
-            <div class="product__price">75.000₫</div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p2","name":"Hộp đồng đựng thuốc lào","price":75000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product__thumb"><img src="img/p3.jpg" alt="Điếu trúc bọc đồng hoa văn chìm"></div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu trúc bọc đồng hoa văn chìm</h3>
-            <div class="product__price">299.000₫</div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p3","name":"Điếu trúc bọc đồng hoa văn chìm","price":299000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product__thumb"><img src="img/p4.jpg" alt="Điếu trúc 9 mắt cao cấp"></div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu trúc 9 mắt cao cấp</h3>
-            <div class="product__price">1.500.000₫</div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p4","name":"Điếu trúc 9 mắt cao cấp","price":1500000}'>Mua ngay</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Featured -->
-  <section id="featured" class="section alt">
-    <div class="container">
-      <div class="section__head">
-        <h2>Sản phẩm nổi bật</h2>
-      </div>
-      <div class="products">
-        <div class="product">
-          <div class="product__thumb"><img src="img/p5.jpg" alt="Điếu cày bọc đồng toàn thân"></div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu cày bọc đồng toàn thân</h3>
-            <div class="product__price">750.000₫</div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p5","name":"Điếu cày bọc đồng toàn thân","price":750000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product__thumb"><img src="img/p6.jpg" alt="Điếu gỗ mun đục rồng"></div>
-          <div class="product__body">
-            <h3 class="product__title">Điếu gỗ mun đục rồng</h3>
-            <div class="product__price">1.100.000₫</div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p6","name":"Điếu gỗ mun đục rồng","price":1100000}'>Mua ngay</button>
-          </div>
-        </div>
-
-        <div class="product">
-          <div class="product__thumb"><img src="img/p7.jpg" alt="Trúc rút full epoxy"></div>
-          <div class="product__body">
-            <h3 class="product__title">Trúc rút full epoxy</h3>
-            <div class="product__price">600.000₫</div>
-          </div>
-          <div class="product__actions">
-            <button class="btn btn--small" data-add='{"id":"p7","name":"Trúc rút full epoxy","price":600000}'>Mua ngay</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Blog -->
-  <section id="blog" class="section">
-    <div class="container">
-      <div class="section__head">
-        <h2>Tin tức & Kiến thức</h2>
-        <a href="#" class="link">Xem tất cả</a>
-      </div>
-      <div class="posts">
-        <article class="post">
-          <img src="img/b1.jpg" alt="Bí quyết chọn điếu cày hợp gu">
-          <div class="post__body">
-            <h3><a href="#">Bí quyết chọn điếu cày hợp gu</a></h3>
-            <p>Phân loại chất liệu, độ dài, thiết kế nõ… để có trải nghiệm “êm” đúng ý.</p>
-            <a class="link" href="#">Đọc tiếp →</a>
-          </div>
-        </article>
-        <article class="post">
-          <img src="img/b2.jpg" alt="Nguồn gốc & hương vị thuốc lào">
-          <div class="post__body">
-            <h3><a href="#">Nguồn gốc & hương vị thuốc lào</a></h3>
-            <p>Khám phá các vùng trồng, cách ủ & bảo quản để giữ trọn vị.</p>
-            <a class="link" href="#">Đọc tiếp →</a>
-          </div>
-        </article>
-        <article class="post">
-          <img src="img/b3.jpg" alt="Mẹo vệ sinh và bảo quản điếu cày">
-          <div class="post__body">
-            <h3><a href="#">Mẹo vệ sinh và bảo quản</a></h3>
-            <p>Giữ điếu luôn sáng bóng, âm êm và bền bỉ theo thời gian.</p>
-            <a class="link" href="#">Đọc tiếp →</a>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefits -->
-  <section id="benefits" class="benefits">
-    <div class="container benefits__grid">
-      <div class="benefit">
-        <img src="img/ic-support.svg" alt="" aria-hidden="true">
-        <h4>Hỗ trợ nhanh</h4>
-        <p>Hotline & Zalo tư vấn 24/7.</p>
-      </div>
-      <div class="benefit">
-        <img src="img/ic-truck.svg" alt="" aria-hidden="true">
-        <h4>Giao hàng toàn quốc</h4>
-        <p>3–5 ngày làm việc, kiểm hàng trước khi nhận.</p>
-      </div>
-      <div class="benefit">
-        <img src="img/ic-wallet.svg" alt="" aria-hidden="true">
-        <h4>Thanh toán linh hoạt</h4>
-        <p>COD, Momo, Chuyển khoản.</p>
-      </div>
-      <div class="benefit">
-        <img src="img/ic-refresh.svg" alt="" aria-hidden="true">
-        <h4>Đổi trả 30 ngày</h4>
-        <p>Đổi mẫu/hoàn tiền theo chính sách.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Order -->
-  <section id="order" class="order">
-    <div class="container">
-      <div class="order__wrap">
-        <div class="order__left">
-          <h2>Đặt hàng nhanh</h2>
-          <p>Điền thông tin, chúng tôi sẽ xác nhận qua email và điện thoại.</p>
-          <form id="orderForm" action="https://formspree.io/f/meozvdoo" method="POST">
-            <input type="text" name="_gotcha" style="display:none">
-            <input type="hidden" name="_subject" value="Đơn hàng mới - Điếu Cày Store">
-            <div class="grid-2">
-              <div>
-                <label>Họ và tên</label>
-                <input name="name" required>
-              </div>
-              <div>
-                <label>Email</label>
-                <input type="email" name="email" required>
-              </div>
+          <div class="grid-2">
+            <div><label>Số điện thoại</label><input name="phone" required></div>
+            <div>
+              <label>Sản phẩm</label>
+              <select name="product" id="formProduct" required>
+                <option value="">-- Chọn sản phẩm --</option>
+                <option value="Điếu nứa bọc đồng nõ ngọc (400000)">Điếu nứa bọc đồng nõ ngọc - 400.000₫</option>
+                <option value="Hộp đồng đựng thuốc lào (75000)">Hộp đồng đựng thuốc lào - 75.000₫</option>
+                <option value="Điếu trúc bọc đồng hoa văn chìm (299000)">Điếu trúc bọc đồng hoa văn chìm - 299.000₫</option>
+                <option value="Điếu trúc 9 mắt cao cấp (1500000)">Điếu trúc 9 mắt cao cấp - 1.500.000₫</option>
+              </select>
             </div>
-            <div class="grid-2">
-              <div>
-                <label>Số điện thoại</label>
-                <input name="phone" required>
-              </div>
-              <div>
-                <label>Sản phẩm</label>
-                <select name="product" id="formProduct" required>
-                  <option value="">-- Chọn sản phẩm --</option>
-                  <option value="Điếu nứa bọc đồng nõ ngọc (400000)">Điếu nứa bọc đồng nõ ngọc - 400.000₫</option>
-                  <option value="Hộp đồng đựng thuốc lào (75000)">Hộp đồng đựng thuốc lào - 75.000₫</option>
-                  <option value="Điếu trúc bọc đồng hoa văn chìm (299000)">Điếu trúc bọc đồng hoa văn chìm - 299.000₫</option>
-                  <option value="Điếu trúc 9 mắt cao cấp (1500000)">Điếu trúc 9 mắt cao cấp - 1.500.000₫</option>
-                  <option value="Điếu cày bọc đồng toàn thân (750000)">Điếu cày bọc đồng toàn thân - 750.000₫</option>
-                  <option value="Điếu gỗ mun đục rồng (1100000)">Điếu gỗ mun đục rồng - 1.100.000₫</option>
-                  <option value="Trúc rút full epoxy (600000)">Trúc rút full epoxy - 600.000₫</option>
-                </select>
-              </div>
-            </div>
-            <div class="grid-2">
-              <div>
-                <label>Số lượng</label>
-                <input type="number" name="qty" id="formQty" value="1" min="1" required>
-              </div>
-              <div>
-                <label>Địa chỉ</label>
-                <input name="address" required>
-              </div>
-            </div>
-            <label>Ghi chú</label>
-            <textarea name="note" rows="3" placeholder="Yêu cầu giao hàng, thời gian nhận..."></textarea>
-
-            <div class="order__total">
-              <span>Tạm tính:</span>
-              <strong id="orderTotal">0₫</strong>
-            </div>
-
-            <div class="order__actions">
-              <button class="btn" id="submitBtn" type="submit">Gửi đơn hàng</button>
-              <div id="ok" class="alert success">Đặt hàng thành công! Vui lòng kiểm tra email.</div>
-              <div id="err" class="alert error">Gửi thất bại. Vui lòng thử lại.</div>
-            </div>
-          </form>
-        </div>
-        <aside class="order__right">
-          <h3>Giỏ hàng</h3>
-          <div id="cartEmpty" class="muted">Chưa có sản phẩm nào.</div>
-          <div id="cartItems" class="cart-items"></div>
-          <div class="cart__total">
-            <span>Tổng:</span>
-            <strong id="cartTotal">0₫</strong>
           </div>
-          <button class="btn btn--ghost" id="clearCart">Xóa giỏ hàng</button>
-        </aside>
-      </div>
-    </div>
-  </section>
+          <div class="grid-2">
+            <div><label>Số lượng</label><input type="number" name="qty" id="formQty" value="1" min="1" required></div>
+            <div><label>Địa chỉ</label><input name="address" required></div>
+          </div>
+          <label>Ghi chú</label>
+          <textarea name="note" rows="3" placeholder="Yêu cầu giao hàng, thời gian nhận..."></textarea>
 
-  <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="container footer__grid">
-      <div>
-        <div class="brand brand--foot"><img src="img/logo.svg" alt="" class="brand__logo"> <span>Điếu Cày Store</span></div>
-        <p class="muted">Địa chỉ: 1264 Lê Đại Hành, P. Hải An, TX. Nghi Sơn, Thanh Hóa</p>
-        <p class="muted">Hotline: <a href="tel:0986943789">0986 943 789</a> • Email: <a href="mailto:shop@example.com">shop@example.com</a></p>
-      </div>
-      <div>
-        <h4>Danh mục</h4>
-        <ul class="list">
-          <li><a href="#products">Điếu cày</a></li>
-          <li><a href="#products">Thuốc lào</a></li>
-          <li><a href="#featured">Nổi bật</a></li>
-          <li><a href="#blog">Bài viết</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Chính sách</h4>
-        <ul class="list">
-          <li><a href="#">Giao hàng</a></li>
-          <li><a href="#">Đổi trả</a></li>
-          <li><a href="#">Bảo hành</a></li>
-          <li><a href="#">Bảo mật</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="container footer__bottom">
-      <span>© <script>document.write(new Date().getFullYear())</script> Điếu Cày Store</span>
-      <a class="link" href="#">Zalo</a>
-      <a class="link" href="#">Facebook</a>
-    </div>
-  </footer>
+          <div class="order__total">
+            <span>Tạm tính:</span><strong id="orderTotal">0₫</strong>
+          </div>
 
-  <!-- Cart Drawer -->
-  <div id="cartDrawer" class="drawer">
-    <div class="drawer__overlay" id="closeCart"></div>
-    <div class="drawer__panel">
-      <div class="drawer__head">
+          <div style="display:flex;gap:10px;align-items:center">
+            <button class="btn" id="submitBtn" type="submit">Gửi đơn hàng</button>
+            <div id="ok" class="alert success">Đặt hàng thành công! Vui lòng kiểm tra email.</div>
+            <div id="err" class="alert error">Gửi thất bại. Vui lòng thử lại.</div>
+          </div>
+        </form>
+      </div>
+
+      <aside class="order__right">
         <h3>Giỏ hàng</h3>
-        <button id="xCart" class="icon-btn" aria-label="Đóng">×</button>
-      </div>
-      <div id="drawerItems" class="drawer__items"></div>
-      <div class="drawer__foot">
-        <div class="drawer__total">Tổng: <strong id="drawerTotal">0₫</strong></div>
-        <a href="#order" class="btn btn--full" id="goCheckout">Đặt hàng</a>
-      </div>
+        <div id="cartEmpty" class="muted">Chưa có sản phẩm nào.</div>
+        <div id="cartItems" class="cart-items"></div>
+        <div class="cart__total">
+          <span>Tổng:</span><strong id="cartTotal">0₫</strong>
+        </div>
+        <button class="btn btn--ghost" id="clearCart">Xóa giỏ hàng</button>
+      </aside>
     </div>
   </div>
+</section>
 
-  <script src="assets/app.js"></script>
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer__bottom">
+    <span>© <script>document.write(new Date().getFullYear())</script> Điếu Cày Store</span>
+    <a href="#products" style="color:#67e8f9">Sản phẩm</a>
+  </div>
+</footer>
 
-<div id="toast" style="position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#0ea5e9;color:#fff;padding:10px 14px;border-radius:10px;display:none;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:9999">Đã thêm vào giỏ hàng</div>
+<!-- Drawer (cart) -->
+<div id="cartDrawer" class="drawer" aria-hidden="true">
+  <div class="drawer__overlay" id="closeCart"></div>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <h3>Giỏ hàng</h3>
+      <button id="xCart" class="icon-btn" aria-label="Đóng">×</button>
+    </div>
+    <div id="drawerItems" class="drawer__items"></div>
+    <div class="drawer__foot">
+      <div>Tổng: <strong id="drawerTotal">0₫</strong></div>
+      <a href="#order" class="btn btn--small" id="goCheckout" style="width:100%">Đặt hàng</a>
+    </div>
+  </div>
+</div>
+
+<div id="toast">Đã thêm vào giỏ hàng</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  const money = n => (n||0).toLocaleString('vi-VN') + '₫';
+
+  // Cart state
+  let cart = JSON.parse(localStorage.getItem('cart')||'[]');
+  const saveCart = () => localStorage.setItem('cart', JSON.stringify(cart));
+  const cartCount = () => cart.reduce((s,i)=>s+i.qty,0);
+  const cartTotal = () => cart.reduce((s,i)=>s+i.qty*i.price,0);
+
+  // Render helpers
+  function toast(msg){
+    const t = $('#toast'); if (!t) return;
+    t.textContent = msg || 'Đã thêm vào giỏ hàng';
+    t.style.display = 'block'; t.style.opacity = 1;
+    setTimeout(()=>{ t.style.transition='opacity .4s'; t.style.opacity = 0; }, 1200);
+    setTimeout(()=>{ t.style.display='none'; t.style.transition='none'; }, 1700);
+  }
+
+  function renderCart(){
+    $('#cartCount').textContent = cartCount();
+    $('#cartTotal').textContent = money(cartTotal());
+    $('#drawerTotal').textContent = money(cartTotal());
+    $('#cartEmpty').style.display = cart.length ? 'none' : 'block';
+
+    const items = $('#cartItems'); items.innerHTML = '';
+    cart.forEach(it => {
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = \`
+        <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Crect width='100%25' height='100%25' rx='8' fill='%23e2e8f0'/%3E%3C/svg%3E">
+        <div><div><strong>\${it.name}</strong></div><div class="muted">x\${it.qty} · \${money(it.price)}</div></div>
+        <div>
+          <button class="btn btn--small" data-dec="\${it.id}">-</button>
+          <button class="btn btn--small" data-inc="\${it.id}">+</button>
+        </div>\`;
+      items.appendChild(row);
+    });
+
+    // Drawer list mirrors main list
+    $('#drawerItems').innerHTML = items.innerHTML;
+  }
+
+  // Delegated +/- in cart
+  document.body.addEventListener('click', (e)=>{
+    if (e.target.matches('[data-inc]')){
+      const id = e.target.getAttribute('data-inc');
+      const it = cart.find(x=>x.id===id); if (it){ it.qty+=1; saveCart(); renderCart(); }
+    }
+    if (e.target.matches('[data-dec]')){
+      const id = e.target.getAttribute('data-dec');
+      const it = cart.find(x=>x.id===id); if (it){ it.qty-=1; if (it.qty<=0) cart = cart.filter(x=>x.id!==id); saveCart(); renderCart(); }
+    }
+  });
+
+  // Add to cart (delegation) — works for both buttons and (below) image click
+  document.body.addEventListener('click', (e)=>{
+    const btn = e.target.closest('[data-add]');
+    if (!btn) return;
+    try {
+      const raw = btn.getAttribute('data-add');
+      let data = JSON.parse(raw);
+      const found = cart.find(i=>i.id===data.id);
+      if (found) found.qty += 1; else cart.push({ ...data, qty:1 });
+      saveCart(); renderCart(); toast('Đã thêm vào giỏ');
+      $('#cartDrawer').classList.add('open');
+    } catch (err) {
+      console.error('Add-to-cart error', err);
+      alert('Không thêm vào giỏ được. Kiểm tra Console để xem lỗi.');
+    }
+  });
+
+  // Click ảnh = add to cart
+  document.addEventListener('click', (e)=>{
+    const thumb = e.target.closest('.product__thumb');
+    if (!thumb) return;
+    const card = thumb.closest('.product');
+    const btn = card?.querySelector('[data-add]');
+    if (btn) btn.click();
+  });
+  // Enter/Space trên ảnh
+  document.addEventListener('keydown', (e)=>{
+    if (!['Enter',' '].includes(e.key)) return;
+    const active = document.activeElement;
+    if (!active?.classList?.contains('product__thumb')) return;
+    e.preventDefault();
+    const card = active.closest('.product');
+    const btn = card?.querySelector('[data-add]');
+    if (btn) btn.click();
+  });
+
+  // Drawer open/close
+  $('#openCart').addEventListener('click', ()=> $('#cartDrawer').classList.add('open'));
+  $('#closeCart').addEventListener('click', ()=> $('#cartDrawer').classList.remove('open'));
+  $('#xCart').addEventListener('click', ()=> $('#cartDrawer').classList.remove('open'));
+  $('#goCheckout').addEventListener('click', ()=> $('#cartDrawer').classList.remove('open'));
+
+  // Clear cart
+  $('#clearCart').addEventListener('click', ()=>{ cart=[]; saveCart(); renderCart(); });
+
+  // Order total calculator
+  const priceMap = {
+    'Điếu nứa bọc đồng nõ ngọc (400000)': 400000,
+    'Hộp đồng đựng thuốc lào (75000)': 75000,
+    'Điếu trúc bọc đồng hoa văn chìm (299000)': 299000,
+    'Điếu trúc 9 mắt cao cấp (1500000)': 1500000
+  };
+  function calcOrderTotal(){
+    const p = $('#formProduct').value;
+    const q = parseInt($('#formQty').value||'1',10);
+    $('#orderTotal').textContent = money((priceMap[p]||0) * q);
+  }
+  $('#formProduct').addEventListener('change', calcOrderTotal);
+  $('#formQty').addEventListener('input', calcOrderTotal);
+  calcOrderTotal();
+
+  // Push first cart item to form when going to order
+  $('#goCheckout').addEventListener('click', ()=>{
+    if (!cart.length) return;
+    const first = cart[0];
+    const key = Object.keys(priceMap).find(k => k.startsWith(first.name));
+    if (key){ $('#formProduct').value = key; $('#formQty').value = first.qty; calcOrderTotal(); }
+    location.hash = '#order';
+  });
+
+  // Submit order via Formspree
+  $('#orderForm').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    $('#ok').style.display='none'; $('#err').style.display='none';
+    $('#submitBtn').disabled = true; $('#submitBtn').textContent = 'Đang gửi...';
+    const data = new FormData($('#orderForm'));
+    try{
+      const res = await fetch($('#orderForm').action, { method:'POST', body:data, headers:{Accept:'application/json'} });
+      if (res.ok){
+        $('#orderForm').reset(); calcOrderTotal(); $('#ok').style.display='block';
+        cart = []; saveCart(); renderCart();
+      }else{
+        $('#err').style.display='block';
+      }
+    }catch(_){ $('#err').style.display='block'; }
+    finally{ $('#submitBtn').disabled = false; $('#submitBtn').textContent = 'Gửi đơn hàng'; }
+  });
+
+  // Initial render
+  renderCart();
+});
+</script>
 </body>
 </html>
