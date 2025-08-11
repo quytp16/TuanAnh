@@ -33,7 +33,7 @@
         <a href="#benefits">Ưu điểm</a>
       </nav>
       <div class="header__cta">
-        <button id="openCart" class="btn btn--ghost">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
+        <button id="openCart" class="btn">Giỏ hàng <span id="cartCount" class="badge">0</span></button>
         <a href="#order" class="btn">Mua ngay</a>
         <button id="menuBtn" class="menu-btn" aria-label="Menu"><span></span><span></span><span></span></button>
       </div>
@@ -143,6 +143,28 @@
               <span>Tạm tính:</span><strong id="orderTotal">0₫</strong>
             </div>
 
+            <label>Phương thức thanh toán</label>
+            <select id="formPayment" name="payment_method" required>
+              <option value="COD" selected>Thanh toán khi nhận hàng (COD)</option>
+              <option value="BANK">Chuyển khoản ngân hàng</option>
+              <option value="MOMO">Ví MoMo</option>
+            </select>
+            <input type="hidden" name="order_total_vnd" id="formTotalHidden" value="0">
+
+            <div id="payGuide" class="muted" style="background:#f1f5f9;border:1px solid #e5e7eb;border-radius:10px;padding:10px;margin:10px 0">
+              <strong>Hướng dẫn:</strong> Mặc định COD. Nếu chọn chuyển khoản/MoMo, thực hiện theo hướng dẫn và ghi mã đơn trong nội dung.
+              <div id="guideBANK" style="display:none;margin-top:6px">
+                <div><strong>Chuyển khoản ngân hàng</strong></div>
+                <div>Ngân hàng: Vietcombank</div>
+                <div>Chủ TK: <em>NGUYEN TUAN ANH</em></div>
+                <div>Số TK: <code>0123456789</code></div>
+                <div>Nội dung: <code>Ten + SoDienThoai</code></div>
+              </div>
+              <div id="guideMOMO" style="display:none;margin-top:6px">
+                <div><strong>MoMo:</strong> 0986 943 789 (ghi nội dung: Ten + SDT)</div>
+              </div>
+            </div>
+
             <div class="order__actions">
               <button class="btn" id="submitBtn" type="submit">Gửi đơn hàng</button>
               <div id="ok" class="alert success">Đặt hàng thành công! Vui lòng kiểm tra email.</div>
@@ -186,6 +208,12 @@
       <div id="drawerItems" class="drawer__items"></div>
       <div class="drawer__foot">
         <div class="drawer__total">Tổng: <strong id="drawerTotal">0₫</strong></div>
+        <label style="display:block;margin:8px 0 6px 0;font-weight:600">Phương thức</label>
+        <select id="drawerPayment" style="width:100%;padding:10px;border:1px solid #e5e7eb;border-radius:10px">
+          <option value="COD" selected>COD</option>
+          <option value="BANK">Chuyển khoản</option>
+          <option value="MOMO">MoMo</option>
+        </select>
         <a href="#order" class="btn btn--full" id="goCheckout">Đặt hàng</a>
       </div>
     </div>

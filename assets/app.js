@@ -10,6 +10,26 @@ function toast(msg){
   setTimeout(()=>{ t.style.display='none'; t.style.transition='none'; }, 1700);
 }
 
+
+function syncPaymentUI(method){
+  const formSel = document.getElementById('formPayment');
+  const drawerSel = document.getElementById('drawerPayment');
+  if (formSel && formSel.value !== method) formSel.value = method;
+  if (drawerSel && drawerSel.value !== method) drawerSel.value = method;
+  const gBank = document.getElementById('guideBANK');
+  const gMomo = document.getElementById('guideMOMO');
+  if (gBank && gMomo){
+    gBank.style.display = (method === 'BANK') ? 'block' : 'none';
+    gMomo.style.display = (method === 'MOMO') ? 'block' : 'none';
+  }
+}
+function updateFormTotalHidden(){
+  const h = document.getElementById('formTotalHidden');
+  if (h) h.value = cartTotal();
+  const ot = document.getElementById('orderTotal');
+  if (ot) ot.textContent = money(cartTotal());
+}
+
 // --- Product data (you can edit here) ---
 // status: 'sale' | 'normal' | 'soldout'
 // stock: initial inventory; persisted to localStorage
@@ -91,6 +111,8 @@ function makeProductCard(p, stockLeft){
 }
 
 function renderCartBadges(){
+  updateFormTotalHidden();
+  updateFormTotalHidden();
   $('#cartCount').textContent = cartCount();
   $('#cartTotal').textContent = money(cartTotal());
   $('#drawerTotal').textContent = money(cartTotal());
@@ -215,11 +237,30 @@ document.addEventListener('DOMContentLoaded', function(){
     }
   });
 
+  
+  // Payment selectors sync
+  const formPayment = document.getElementById('formPayment');
+  const drawerPayment = document.getElementById('drawerPayment');
+  if (formPayment){ formPayment.addEventListener('change', ()=> syncPaymentUI(formPayment.value)); }
+  if (drawerPayment){ drawerPayment.addEventListener('change', ()=> syncPaymentUI(drawerPayment.value)); }
+  // Initialize payment guides
+  syncPaymentUI(formPayment ? formPayment.value : 'COD');
+  updateFormTotalHidden();
+
+  // Payment selectors sync
+  const formPayment = document.getElementById('formPayment');
+  const drawerPayment = document.getElementById('drawerPayment');
+  if (formPayment){ formPayment.addEventListener('change', ()=> syncPaymentUI(formPayment.value)); }
+  if (drawerPayment){ drawerPayment.addEventListener('change', ()=> syncPaymentUI(drawerPayment.value)); }
+  // Initialize guides
+  syncPaymentUI(formPayment ? formPayment.value : 'COD');
+  updateFormTotalHidden();
+
   // Drawer open/close
   $('#openCart').addEventListener('click', ()=> $('#cartDrawer').classList.add('open'));
   $('#closeCart').addEventListener('click', ()=> $('#cartDrawer').classList.remove('open'));
   $('#xCart').addEventListener('click', ()=> $('#cartDrawer').classList.remove('open'));
-  $('#goCheckout').addEventListener('click', ()=> $('#cartDrawer').classList.remove('open'));
+  $('#goCheckout').addEventListener('click', ()=>{ $('#cartDrawer').classList.remove('open'); const dp = document.getElementById('drawerPayment'); if (dp) syncPaymentUI(dp.value); });
 
   // Clear cart (restore stock amounts)
   $('#clearCart').addEventListener('click', ()=>{
