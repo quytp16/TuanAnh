@@ -78,20 +78,3 @@ textarea{resize:vertical}
 
 /* Toast */
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--brand);color:#fff;padding:10px 14px;border-radius:10px;display:none;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:9999}
-
-.footer-icons{
-  display:flex; gap:10px; align-items:center;
-}
-.icon-btn{
-  width:40px; height:40px; border-radius:50%;
-  display:inline-flex; align-items:center; justify-content:center;
-  background:#0ea5e9; /* màu nền nút */
-  box-shadow:0 4px 14px rgba(0,0,0,.15);
-  transition:transform .15s ease, filter .15s ease;
-}
-.icon-btn:hover{ transform:translateY(-2px); filter:brightness(.95); }
-.icon-btn svg{ width:22px; height:22px; fill:#fff; }
-
-.icon-btn:nth-child(1){ background:#16a34a; } /* Gọi: xanh lá */
-.icon-btn:nth-child(2){ background:#0ea5e9; } /* Zalo: xanh dương nhạt */
-.icon-btn:nth-child(3){ background:#1877f2; } /* Facebook: xanh FB */
