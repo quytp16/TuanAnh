@@ -101,3 +101,51 @@ textarea{resize:vertical}
 .phone-fab { bottom: 150px; }   /* 56px + 10px khoảng cách tiếp */
 /* Toast */
 #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--brand);color:#fff;padding:10px 14px;border-radius:10px;display:none;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:9999}
+
+
+/* ========== Mobile & iOS Safari tweaks (appended) ========== */
+html, body { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+* { -webkit-tap-highlight-color: rgba(0,0,0,0); }
+
+/* Inputs >=16px to avoid iOS zoom */
+input, select, textarea, button { font-size: 16px; }
+
+/* Minimum touch target per Apple HIG */
+button, .btn, .icon-btn, .phone-fab, .facebook-fab, .zalo-fab, a.btn {
+  min-height: 44px; min-width: 44px;
+}
+
+/* Safe-area for devices with notch (iPhone) */
+.header, .footer { padding-left: max(1rem, env(safe-area-inset-left)); padding-right: max(1rem, env(safe-area-inset-right)); }
+.phone-fab, .facebook-fab, .zalo-fab { bottom: calc(16px + env(safe-area-inset-bottom)); }
+.drawer__panel, .modal__panel { padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+
+/* Smooth scrolling areas in iOS */
+.drawer__items { -webkit-overflow-scrolling: touch; }
+.modal { -webkit-overflow-scrolling: touch; }
+
+/* Prefer new viewport units to avoid iOS 100vh jump */
+:root { --vh: 1svh; } /* fallback */
+.hero, .drawer, .modal { min-height: 60svh; } /* safe "svh" behaves better on iOS */
+
+/* Images responsive + lazy placeholder */
+img { height: auto; max-width: 100%; display: block; }
+
+/* Make sticky header stable on Safari */
+.header { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(6px); -webkit-backdrop-filter: saturate(180%) blur(6px); background: rgba(255,255,255,0.8); }
+
+/* Buttons */
+.btn { padding: 12px 16px; border-radius: 12px; }
+.btn--full { width: 100%; }
+
+/* Forms grid gap for small screens */
+@media (max-width: 480px){
+  .form-grid { gap: 10px; }
+}
+
+/* Improve tap affordance on product cards */
+.product { cursor: pointer; }
+.product .buy-now { touch-action: manipulation; }
+
+/* Avoid input "flash" border radius differences */
+input, select, textarea { -webkit-appearance: none; border-radius: 10px; }
